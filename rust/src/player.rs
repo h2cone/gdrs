@@ -1,13 +1,13 @@
 use godot::{
     builtin::Vector2,
     classes::{ISprite2D, Sprite2D},
-    obj::{Base, WithBaseField},
+    obj::{Base, WithBaseField, WithUserSignals},
     prelude::{GodotClass, godot_api},
 };
 
 #[derive(GodotClass)]
 #[class(base = Sprite2D)]
-struct Player {
+pub struct Player {
     base: Base<Sprite2D>,
 
     speed: f32,
@@ -39,9 +39,9 @@ impl Player {
     #[func]
     fn increase_speed(&mut self, amount: f32) {
         self.speed += amount;
-        self.base_mut().emit_signal("speed_increased", &[]);
+        self.signals().speed_increased().emit();
     }
 
     #[signal]
-    fn speed_increased();
+    pub fn speed_increased();
 }

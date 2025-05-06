@@ -1,5 +1,6 @@
 use godot::init::{ExtensionLibrary, gdextension};
 
+mod main_scene;
 mod player;
 
 struct MyExtension;
